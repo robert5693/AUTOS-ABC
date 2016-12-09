@@ -29,6 +29,8 @@ public class Manejadora_Eventos implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
+        
+        //Boton de loguearse
         if (ae.getSource().equals(interfaz.jButton12)) {
             List<Avatar> avatares = new ArrayList<>();
             avatares.add(new Avatar("menu 1", loadImage("/Fotos/1.jpg")));
