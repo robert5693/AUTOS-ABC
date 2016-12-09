@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 import java.sql.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author USUARIO
@@ -74,7 +75,9 @@ public class AccesoDatos {
             Connection con = fachada.conectarABD();
             instruccion = con.createStatement();
             respuesta = instruccion.executeQuery(consulta);
+            
             fachada.cerrarConexion(con);
+            JOptionPane.showMessageDialog(null,respuesta);
         }catch(SQLException sqle){
             System.out.println("Error al consultar datos");
         }
@@ -170,7 +173,7 @@ public class AccesoDatos {
         return numFilas;
     }  
     
-    public ResultSet consultaUsuario(String id){
+    public ResultSet consultarUsuario(String id){
         ResultSet usuario = null;
         
         String consulta = "SELECT * FROM usuario WHERE id_usuario = " + "'"+id+"'"; 
@@ -188,5 +191,96 @@ public class AccesoDatos {
         
         
         return usuario;
+    }
+
+    ResultSet consultarCliente(String cedula) {
+        ResultSet cliente = null;
+        
+        String consulta = "SELECT * FROM cliente WHERE cedula = " + "'"+cedula+"'"; 
+        
+        try{
+            Connection con = fachada.conectarABD();
+            instruccion = con.createStatement();
+            cliente = instruccion.executeQuery(consulta);
+            fachada.cerrarConexion(con);
+            
+               
+        }catch(SQLException sqle){
+            System.out.println("Error al consultar datos"+sqle);
+        }
+        
+        
+        return cliente;
+    }
+
+    ResultSet consultarSede(String id_vendedor) {
+        ResultSet usuario = null;
+        
+        String consulta = "SELECT id_sede FROM usuario WHERE id_usuario = " + "'"+id_vendedor+"'"; 
+        
+        try{
+            Connection con = fachada.conectarABD();
+            instruccion = con.createStatement();
+            usuario = instruccion.executeQuery(consulta);
+            fachada.cerrarConexion(con);
+            
+               
+        }catch(SQLException sqle){
+            System.out.println("Error al consultar datos"+sqle);
+        }
+        
+        
+        return usuario;
+    }
+
+    ResultSet listarCotizaciones(String cedula) {
+        String consulta ="SELECT id_cotizacion,fecha FROM cotizacion WHERE cedula_cliente = '"+cedula+"';";
+        
+        try{
+            Connection con = fachada.conectarABD();
+            instruccion = con.createStatement();
+            respuesta = instruccion.executeQuery(consulta);
+            fachada.cerrarConexion(con);
+            
+               
+        }catch(SQLException sqle){
+            System.out.println("Error al consultar datos");
+        }
+        
+        return respuesta;
+    }
+
+    ResultSet consultarCotizacionFecha(String fecha) {
+        String consulta ="SELECT id_cotizacion,fecha FROM cotizacion WHERE fecha = '"+fecha+"';";
+        
+        try{
+            Connection con = fachada.conectarABD();
+            instruccion = con.createStatement();
+            respuesta = instruccion.executeQuery(consulta);
+            fachada.cerrarConexion(con);
+            
+               
+        }catch(SQLException sqle){
+            System.out.println("Error al consultar datos");
+        }
+        
+        return respuesta;
+    }
+
+    ResultSet consultarFoto(String id) {
+        String consulta ="SELECT foto FROM usuario WHERE id_usuario = '"+id+"';";
+        
+        try{
+            Connection con = fachada.conectarABD();
+            instruccion = con.createStatement();
+            respuesta = instruccion.executeQuery(consulta);
+            fachada.cerrarConexion(con);
+            
+               
+        }catch(SQLException sqle){
+            System.out.println("Error al consultar datos");
+        }
+        
+        return respuesta;
     }
 }

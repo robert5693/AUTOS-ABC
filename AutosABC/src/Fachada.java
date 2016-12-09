@@ -11,16 +11,26 @@ public class Fachada {
     private String url, usuario, pwd;
     private Connection conexion;
     
-    public Fachada(){
-        url = "jdbc:postgresql://localhost:5432/EmpresaABC";
+    public Fachada(){ 
+        //mysql
+        url = "jdbc:mysql://localhost/AutosABC";
+        usuario="soporte";
+        pwd ="Soporte1@";
+        /* //postgresql
+        url = "jdbc:postgresql://localhost:5693/EmpresaABC";
         usuario="postgres";
-        pwd ="cj1428907cr";
+        pwd ="yuliandrea5693";
+        */
     }
     
     public Connection conectarABD(){
         
         try{
-            Class.forName("org.postgresql.Driver");
+            //postgresql
+            //Class.forName("org.postgresql.Driver");
+            //mysql
+            Class.forName("com.mysql.jdbc.Driver");
+            
             System.out.println( "Driver Cargado" );
         }catch(Exception e){
             System.out.println( "No se pudo cargar el driver."+e );

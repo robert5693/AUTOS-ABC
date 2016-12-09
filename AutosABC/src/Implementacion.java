@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -34,13 +35,11 @@ public class Implementacion {
        String[] pass = null;
        ResultSet respuesta = datos.loguearse(nombre);
        
-       while (respuesta.next()) {
-               String em = respuesta.getString("id_usuario");
-               info = em.split("\n");
-               String pw = respuesta.getString("password");
-               pass = pw.split("\n");   
+       while (respuesta.next()) {           
+               String em = respuesta.getString(1);
+               JOptionPane.showMessageDialog(null,"hola");
+               String pw = respuesta.getString(2);   
        }
-       
                 if (info == null || pass == null){
                    validacion = false;
                }else{
@@ -190,7 +189,7 @@ public class Implementacion {
      public boolean esUsuario(String id) throws SQLException{
     boolean bool = false;
         
-    ResultSet consulta = datos.consultaUsuario(id);
+    ResultSet consulta = datos.consultarUsuario(id);
     
          if (consulta.next()) {
              bool = true;
@@ -199,4 +198,117 @@ public class Implementacion {
     return bool;
     
     }
+    
+    ArrayList<String> consultarCliente(String cedula) {
+        ArrayList<String> datosCliente=new ArrayList();
+        try {
+                ResultSet rs = datos.consultarCliente(cedula);
+                while(rs.next()){
+                    datosCliente.add(rs.getString("cedula"));
+                    datosCliente.add(rs.getString("primer_nombre"));                   
+                    datosCliente.add(rs.getString("segundo_nombre"));
+                    datosCliente.add(rs.getString("primer_apellido"));
+                    datosCliente.add( rs.getString("segundo_apellido"));
+                    datosCliente.add( rs.getString("telefono"));
+                }    
+                
+        } catch (SQLException ex) {
+            System.out.println("error al sacar la información del resultset");
+            
+        }
+        return datosCliente;
+    }
+    
+    ArrayList<String> consultarUsuario(String id) {
+         ArrayList<String> datosUsuario=new ArrayList();
+               try {
+                ResultSet rs = datos.consultarUsuario(id);
+                while(rs.next()){
+                    datosUsuario.add(rs.getString("id_usuario"));
+                    datosUsuario.add(rs.getString("password"));
+                    datosUsuario.add(rs.getString("cedula"));
+                    datosUsuario.add(rs.getString("primer_nombre"));
+                    datosUsuario.add(rs.getString("segundo_nombre"));
+                    datosUsuario.add(rs.getString("primer_apellido"));
+                    datosUsuario.add(rs.getString("segundo_Apellido"));
+                    datosUsuario.add(rs.getString("telefono1"));
+                    datosUsuario.add(rs.getString("telefono2"));
+                    datosUsuario.add(rs.getString("direccion"));
+                    datosUsuario.add(rs.getString("foto"));
+                    datosUsuario.add(rs.getString("fecha_nacimiento"));
+                    datosUsuario.add(rs.getString("estado"));
+                    datosUsuario.add(rs.getString("id_sede"));
+                    datosUsuario.add(rs.getString("tipo"));
+                }   
+                
+        } catch (SQLException ex) {
+            System.out.println("error al saar la información del resultset");
+            
+        }
+        return datosUsuario;
+    }
+
+    String consultarSede(String id_vendedor) {
+        String id_sede="";
+ 
+               try {
+                ResultSet rs = datos.consultarSede(id_vendedor);
+                while(rs.next()){
+                    id_sede = rs.getString("id_sede");
+                }    
+                
+        } catch (SQLException ex) {
+            System.out.println("error al saar la información del resultset");
+            
+        }
+        return id_sede;
+    }
+
+    ArrayList<String> listarCotizaciones(String cedula) {
+        ArrayList<String> aux=new ArrayList();
+        try {
+                ResultSet rs = datos.listarCotizaciones(cedula);
+                while(rs.next()){
+                    aux.add(rs.getString("id_cotizacion"));
+                    aux.add(rs.getString("fecha"));
+                }    
+                
+        } catch (SQLException ex) {
+            System.out.println("error al sacar la información del resultset");
+            
+        }
+        return aux;
+    }
+
+    ArrayList<String> listarCotizacionesfecha(String fecha) {
+        ArrayList<String> aux=new ArrayList();
+        try {
+                ResultSet rs = datos.consultarCotizacionFecha(fecha);
+                while(rs.next()){
+                    
+                }    
+                
+        } catch (SQLException ex) {
+            System.out.println("error al sacar la información del resultset");
+            
+        }
+        return aux;
+    }
+
+    String consultarFoto(String id) {
+        String ruta="";
+        try {
+                ResultSet rs = datos.consultarFoto(id);
+                while(rs.next()){
+                    ruta=rs.getString("foto");
+                }    
+                
+        } catch (SQLException ex) {
+            System.out.println("error al sacar la información del resultset");
+            
+        }
+        return ruta;
+    }
+    
+    
 }
