@@ -6,23 +6,20 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import org.edisoncor.gui.util.Avatar;
 
 //Inicio Clase Servidor
 public class Interfaz extends javax.swing.JFrame {
-
+    Manejadora_Eventos eventos;
     Implementacion obj;
     AccesoDatos obj2;
     Validaciones validador;
 
     //Constructor 
-    public Interfaz() throws IOException {
+    public Interfaz(Manejadora_Eventos eventos) throws IOException {
         super("LOGIN");
         initComponents();
         setLocationRelativeTo(null);
@@ -30,6 +27,8 @@ public class Interfaz extends javax.swing.JFrame {
         obj = new Implementacion();
         obj2 = new AccesoDatos();
         validador = new Validaciones();
+        
+        jButton12.addActionListener(eventos);
         
         
     }
@@ -43,7 +42,7 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrameGerente = new javax.swing.JFrame();
+        jFrameGerenteBotones = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         nombreUsuario = new javax.swing.JLabel();
@@ -79,6 +78,43 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         jButton22 = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu10 = new javax.swing.JMenu();
+        jMenuItem21 = new javax.swing.JMenuItem();
+        jMenuItem22 = new javax.swing.JMenuItem();
+        jMenu11 = new javax.swing.JMenu();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        jMenu12 = new javax.swing.JMenu();
+        jMenuItem23 = new javax.swing.JMenuItem();
+        jMenuItem24 = new javax.swing.JMenuItem();
+        jMenuItem25 = new javax.swing.JMenuItem();
+        jMenu13 = new javax.swing.JMenu();
+        jMenuItem26 = new javax.swing.JMenuItem();
+        jMenuItem27 = new javax.swing.JMenuItem();
+        jMenu14 = new javax.swing.JMenu();
+        jMenuItem28 = new javax.swing.JMenuItem();
+        jMenuItem29 = new javax.swing.JMenuItem();
+        jMenuItem30 = new javax.swing.JMenuItem();
+        jMenu15 = new javax.swing.JMenu();
+        jMenuItem31 = new javax.swing.JMenuItem();
+        jMenuItem32 = new javax.swing.JMenuItem();
+        jMenuItem33 = new javax.swing.JMenuItem();
+        jMenuItem34 = new javax.swing.JMenuItem();
+        jMenu16 = new javax.swing.JMenu();
+        jMenuItem35 = new javax.swing.JMenuItem();
+        jMenuItem36 = new javax.swing.JMenuItem();
+        jMenuItem37 = new javax.swing.JMenuItem();
+        jMenu17 = new javax.swing.JMenu();
+        jMenuItem38 = new javax.swing.JMenuItem();
+        jMenuItem39 = new javax.swing.JMenuItem();
+        jFrameGerente = new javax.swing.JFrame();
+        jPanel52 = new javax.swing.JPanel();
+        jLabel99 = new javax.swing.JLabel();
+        nombreUsuario11 = new javax.swing.JLabel();
+        jPanel59 = new javax.swing.JPanel();
+        jPanel60 = new javax.swing.JPanel();
+        panelAvatarChooser1 = new org.edisoncor.gui.panel.PanelAvatarChooser();
+        jButton80 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -430,14 +466,6 @@ public class Interfaz extends javax.swing.JFrame {
         jButton30 = new javax.swing.JButton();
         jButton31 = new javax.swing.JButton();
         jLabel105 = new javax.swing.JLabel();
-        jPanel52 = new javax.swing.JPanel();
-        jLabel99 = new javax.swing.JLabel();
-        nombreUsuario11 = new javax.swing.JLabel();
-        jPanel59 = new javax.swing.JPanel();
-        jPanel60 = new javax.swing.JPanel();
-        jButton80 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jPanel51 = new javax.swing.JPanel();
         jFrameBuscarSede = new javax.swing.JFrame();
         jLabel100 = new javax.swing.JLabel();
         jButton44 = new javax.swing.JButton();
@@ -458,9 +486,6 @@ public class Interfaz extends javax.swing.JFrame {
         jButton68 = new javax.swing.JButton();
         jComboBox34 = new javax.swing.JComboBox();
         jFileChooser1 = new javax.swing.JFileChooser();
-        jFrame2 = new javax.swing.JFrame();
-        jPanel31 = new javax.swing.JPanel();
-        panelAvatarChooser1 = new org.edisoncor.gui.panel.PanelAvatarChooser();
         jPanelLogin = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         usuario = new javax.swing.JTextField();
@@ -470,10 +495,12 @@ public class Interfaz extends javax.swing.JFrame {
         contraseña = new javax.swing.JPasswordField();
         jButton12 = new javax.swing.JButton();
 
-        jFrameGerente.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        jFrameGerente.setTitle("Gerente");
+        jFrameGerenteBotones.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jFrameGerenteBotones.setTitle("Gerente");
+        jFrameGerenteBotones.setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setMinimumSize(new java.awt.Dimension(872, 730));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel4.setText("Autos ABC");
@@ -521,10 +548,10 @@ public class Interfaz extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
@@ -589,7 +616,7 @@ public class Interfaz extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton5)
@@ -738,7 +765,7 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 606, Short.MAX_VALUE)
+            .addGap(0, 690, Short.MAX_VALUE)
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -751,7 +778,9 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel50.setLayout(jPanel50Layout);
         jPanel50Layout.setHorizontalGroup(
             jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel50Layout.createSequentialGroup()
+                .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel50Layout.setVerticalGroup(
             jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -766,7 +795,7 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -777,31 +806,28 @@ public class Interfaz extends javax.swing.JFrame {
                             .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel50, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton22, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel27)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(nombreUsuario)
-                                .addGap(24, 24, 24))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())))
+                                .addGap(12, 12, 12))
+                            .addComponent(jPanel21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -822,7 +848,225 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        jMenu10.setText("Nombre");
+
+        jMenuItem21.setText("Modificar Datos");
+        jMenu10.add(jMenuItem21);
+
+        jMenuItem22.setText("Salir");
+        jMenu10.add(jMenuItem22);
+
+        jMenuBar3.add(jMenu10);
+
+        jMenu11.setText("Vistas");
+
+        jCheckBoxMenuItem2.setSelected(true);
+        jCheckBoxMenuItem2.setText("Mostrar Botones");
+        jCheckBoxMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jCheckBoxMenuItem2);
+
+        jMenuBar3.add(jMenu11);
+
+        jMenu12.setText("Usuarios");
+
+        jMenuItem23.setText("Crear");
+        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem23ActionPerformed(evt);
+            }
+        });
+        jMenu12.add(jMenuItem23);
+
+        jMenuItem24.setText("Modificar");
+        jMenu12.add(jMenuItem24);
+
+        jMenuItem25.setText("Buscar");
+        jMenu12.add(jMenuItem25);
+
+        jMenuBar3.add(jMenu12);
+
+        jMenu13.setText("Sede");
+
+        jMenuItem26.setText("Modificar");
+        jMenu13.add(jMenuItem26);
+
+        jMenuItem27.setText("Vendedores");
+        jMenu13.add(jMenuItem27);
+
+        jMenuBar3.add(jMenu13);
+
+        jMenu14.setText("Taller");
+
+        jMenuItem28.setText("Nuevo Repuesto");
+        jMenu14.add(jMenuItem28);
+
+        jMenuItem29.setText("Buscar Repuesto");
+        jMenu14.add(jMenuItem29);
+
+        jMenuItem30.setText("Buscar Vehiculo");
+        jMenu14.add(jMenuItem30);
+
+        jMenuBar3.add(jMenu14);
+
+        jMenu15.setText("Ventas");
+
+        jMenuItem31.setText("Nueva Venta");
+        jMenu15.add(jMenuItem31);
+
+        jMenuItem32.setText("Nueva Cotizacion");
+        jMenu15.add(jMenuItem32);
+
+        jMenuItem33.setText("Buscar Venta");
+        jMenu15.add(jMenuItem33);
+
+        jMenuItem34.setText("Buscar Cotizacion");
+        jMenu15.add(jMenuItem34);
+
+        jMenuBar3.add(jMenu15);
+
+        jMenu16.setText("Reportes");
+
+        jMenuItem35.setText("Ventas");
+        jMenu16.add(jMenuItem35);
+
+        jMenuItem36.setText("Visitas");
+        jMenu16.add(jMenuItem36);
+
+        jMenuItem37.setText("Cotizaciones");
+        jMenu16.add(jMenuItem37);
+
+        jMenuBar3.add(jMenu16);
+
+        jMenu17.setText("Inventarios");
+
+        jMenuItem38.setText("Repuestos");
+        jMenuItem38.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem38ActionPerformed(evt);
+            }
+        });
+        jMenu17.add(jMenuItem38);
+
+        jMenuItem39.setText("Automoviles");
+        jMenu17.add(jMenuItem39);
+
+        jMenuBar3.add(jMenu17);
+
+        jFrameGerenteBotones.setJMenuBar(jMenuBar3);
+
+        javax.swing.GroupLayout jFrameGerenteBotonesLayout = new javax.swing.GroupLayout(jFrameGerenteBotones.getContentPane());
+        jFrameGerenteBotones.getContentPane().setLayout(jFrameGerenteBotonesLayout);
+        jFrameGerenteBotonesLayout.setHorizontalGroup(
+            jFrameGerenteBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jFrameGerenteBotonesLayout.setVerticalGroup(
+            jFrameGerenteBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        jFrameGerente.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jFrameGerente.setTitle("Gerente");
+        jFrameGerente.setResizable(false);
+
+        jPanel52.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel52.setMinimumSize(new java.awt.Dimension(786, 695));
+
+        jLabel99.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel99.setText("Autos ABC");
+
+        nombreUsuario11.setText("Nombre Usuario");
+
+        jPanel59.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel59Layout = new javax.swing.GroupLayout(jPanel59);
+        jPanel59.setLayout(jPanel59Layout);
+        jPanel59Layout.setHorizontalGroup(
+            jPanel59Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 619, Short.MAX_VALUE)
+        );
+        jPanel59Layout.setVerticalGroup(
+            jPanel59Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
+        );
+
+        jPanel60.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel60Layout = new javax.swing.GroupLayout(jPanel60);
+        jPanel60.setLayout(jPanel60Layout);
+        jPanel60Layout.setHorizontalGroup(
+            jPanel60Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 183, Short.MAX_VALUE)
+        );
+        jPanel60Layout.setVerticalGroup(
+            jPanel60Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 212, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panelAvatarChooser1Layout = new javax.swing.GroupLayout(panelAvatarChooser1);
+        panelAvatarChooser1.setLayout(panelAvatarChooser1Layout);
+        panelAvatarChooser1Layout.setHorizontalGroup(
+            panelAvatarChooser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelAvatarChooser1Layout.setVerticalGroup(
+            panelAvatarChooser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 256, Short.MAX_VALUE)
+        );
+
+        jButton80.setText("Modificar Datos");
+
+        javax.swing.GroupLayout jPanel52Layout = new javax.swing.GroupLayout(jPanel52);
+        jPanel52.setLayout(jPanel52Layout);
+        jPanel52Layout.setHorizontalGroup(
+            jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel52Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel52Layout.createSequentialGroup()
+                        .addComponent(jLabel99)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nombreUsuario11))
+                    .addGroup(jPanel52Layout.createSequentialGroup()
+                        .addGroup(jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel60, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton80))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel59, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(33, 33, 33))
+            .addGroup(jPanel52Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelAvatarChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel52Layout.setVerticalGroup(
+            jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel52Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel52Layout.createSequentialGroup()
+                        .addComponent(jLabel99)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel60, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton80))
+                    .addGroup(jPanel52Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(nombreUsuario11)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel59, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelAvatarChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Nombre");
@@ -839,6 +1083,11 @@ public class Interfaz extends javax.swing.JFrame {
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("Mostrar Botones");
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jCheckBoxMenuItem1);
 
         jMenuBar1.add(jMenu2);
@@ -934,11 +1183,17 @@ public class Interfaz extends javax.swing.JFrame {
         jFrameGerente.getContentPane().setLayout(jFrameGerenteLayout);
         jFrameGerenteLayout.setHorizontalGroup(
             jFrameGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 875, Short.MAX_VALUE)
+            .addGroup(jFrameGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel52, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jFrameGerenteLayout.setVerticalGroup(
             jFrameGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 697, Short.MAX_VALUE)
+            .addGroup(jFrameGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jFrameGerenteLayout.createSequentialGroup()
+                    .addComponent(jPanel52, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jFrameVendedor.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -3345,101 +3600,6 @@ public class Interfaz extends javax.swing.JFrame {
             .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jPanel52.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel99.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel99.setText("Autos ABC");
-
-        nombreUsuario11.setText("Nombre Usuario");
-
-        jPanel59.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout jPanel59Layout = new javax.swing.GroupLayout(jPanel59);
-        jPanel59.setLayout(jPanel59Layout);
-        jPanel59Layout.setHorizontalGroup(
-            jPanel59Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
-        );
-        jPanel59Layout.setVerticalGroup(
-            jPanel59Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
-        );
-
-        jPanel60.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout jPanel60Layout = new javax.swing.GroupLayout(jPanel60);
-        jPanel60.setLayout(jPanel60Layout);
-        jPanel60Layout.setHorizontalGroup(
-            jPanel60Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 136, Short.MAX_VALUE)
-        );
-        jPanel60Layout.setVerticalGroup(
-            jPanel60Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 212, Short.MAX_VALUE)
-        );
-
-        jButton80.setText("Modificar Datos");
-
-        javax.swing.GroupLayout jPanel51Layout = new javax.swing.GroupLayout(jPanel51);
-        jPanel51.setLayout(jPanel51Layout);
-        jPanel51Layout.setHorizontalGroup(
-            jPanel51Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 748, Short.MAX_VALUE)
-        );
-        jPanel51Layout.setVerticalGroup(
-            jPanel51Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
-        );
-
-        jScrollPane2.setViewportView(jPanel51);
-
-        javax.swing.GroupLayout jPanel52Layout = new javax.swing.GroupLayout(jPanel52);
-        jPanel52.setLayout(jPanel52Layout);
-        jPanel52Layout.setHorizontalGroup(
-            jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel52Layout.createSequentialGroup()
-                .addGroup(jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel52Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel52Layout.createSequentialGroup()
-                        .addGroup(jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel52Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(jLabel99)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel52Layout.createSequentialGroup()
-                                .addContainerGap(26, Short.MAX_VALUE)
-                                .addGroup(jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton80)
-                                    .addComponent(jPanel60, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)))
-                        .addGroup(jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel59, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nombreUsuario11))))
-                .addGap(24, 24, 24))
-        );
-        jPanel52Layout.setVerticalGroup(
-            jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel52Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel52Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(nombreUsuario11)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel59, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel52Layout.createSequentialGroup()
-                        .addComponent(jLabel99)
-                        .addGap(27, 27, 27)
-                        .addComponent(jPanel60, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton80)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         jButton44.setText("Modificar");
         jButton44.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -3609,47 +3769,6 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout panelAvatarChooser1Layout = new javax.swing.GroupLayout(panelAvatarChooser1);
-        panelAvatarChooser1.setLayout(panelAvatarChooser1Layout);
-        panelAvatarChooser1Layout.setHorizontalGroup(
-            panelAvatarChooser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 823, Short.MAX_VALUE)
-        );
-        panelAvatarChooser1Layout.setVerticalGroup(
-            panelAvatarChooser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 256, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
-        jPanel31.setLayout(jPanel31Layout);
-        jPanel31Layout.setHorizontalGroup(
-            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel31Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelAvatarChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel31Layout.setVerticalGroup(
-            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel31Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelAvatarChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
-        jFrame2.getContentPane().setLayout(jFrame2Layout);
-        jFrame2Layout.setHorizontalGroup(
-            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrame2Layout.createSequentialGroup()
-                .addComponent(jPanel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(2, 2, 2))
-        );
-        jFrame2Layout.setVerticalGroup(
-            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusable(false);
         setResizable(false);
@@ -3676,9 +3795,9 @@ public class Interfaz extends javax.swing.JFrame {
         });
 
         jButton12.setText("jButton12");
-        jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton12MouseClicked(evt);
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
             }
         });
 
@@ -4245,7 +4364,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton75MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton75MouseClicked
 
         int opcion = jFileChooser1.showSaveDialog(this);
-        if (opcion == jFileChooser1.APPROVE_OPTION) {
+        if (opcion == JFileChooser.APPROVE_OPTION) {
 
             File f = jFileChooser1.getSelectedFile();
             String ruta = f.toString();
@@ -4275,465 +4394,506 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel21.add(textGerente);
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
-        
-        List<Avatar> avatares = new ArrayList<Avatar>();
-        
-        avatares.add(new Avatar ("menu 1",loadImage("/Fotos/1.jpg")));
-        avatares.add(new Avatar ("menu 2",loadImage("/Fotos/2.jpg")));
-        avatares.add(new Avatar ("menu 2",loadImage("/Fotos/3.jpg")));
-        avatares.add(new Avatar ("menu 2",loadImage("/Fotos/4.jpg")));
-        avatares.add(new Avatar ("menu 14",loadImage("/Fotos/5.jpg")));
-        avatares.add(new Avatar ("menu 14",loadImage("/Fotos/6.jpg")));
-        panelAvatarChooser1.setAvatars(avatares);
-        jFrame2.setVisible(true);
-        jFrame2.pack();
-    }//GEN-LAST:event_jButton12MouseClicked
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private static Image loadImage(String fileName) {
-         try {
-            return ImageIO.read(JFrame.class.getResource(fileName));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
+    private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem23ActionPerformed
+
+    private void jMenuItem38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem38ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem38ActionPerformed
+
+    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
+      if(jCheckBoxMenuItem1.getState()){
+          jFrameGerente.setVisible(false);
+          jFrameGerenteBotones.setVisible(true);
+          jFrameGerenteBotones.pack();
+          jCheckBoxMenuItem2.setState(true);
+      }else {
+          jFrameGerente.setVisible(true);
+          jFrameGerenteBotones.setVisible(false);
+      }
+    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+
+    private void jCheckBoxMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem2ActionPerformed
+        if(!jCheckBoxMenuItem2.getState()){
+            jFrameGerente.setVisible(true);
+            jFrameGerente.pack();
+            jFrameGerenteBotones.setVisible(false);
+            jCheckBoxMenuItem1.setState(false);
+        }else {
+          jFrameGerente.setVisible(false);
+          jFrameGerenteBotones.setVisible(true);
+      }
+    }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPasswordField contraseña;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton25;
-    private javax.swing.JButton jButton26;
-    private javax.swing.JButton jButton27;
-    private javax.swing.JButton jButton28;
-    private javax.swing.JButton jButton29;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton30;
-    private javax.swing.JButton jButton31;
-    private javax.swing.JButton jButton32;
-    private javax.swing.JButton jButton33;
-    private javax.swing.JButton jButton34;
-    private javax.swing.JButton jButton35;
-    private javax.swing.JButton jButton36;
-    private javax.swing.JButton jButton37;
-    private javax.swing.JButton jButton38;
-    private javax.swing.JButton jButton39;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton40;
-    private javax.swing.JButton jButton41;
-    private javax.swing.JButton jButton42;
-    private javax.swing.JButton jButton43;
-    private javax.swing.JButton jButton44;
-    private javax.swing.JButton jButton45;
-    private javax.swing.JButton jButton46;
-    private javax.swing.JButton jButton47;
-    private javax.swing.JButton jButton48;
-    private javax.swing.JButton jButton49;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton50;
-    private javax.swing.JButton jButton51;
-    private javax.swing.JButton jButton52;
-    private javax.swing.JButton jButton53;
-    private javax.swing.JButton jButton54;
-    private javax.swing.JButton jButton55;
-    private javax.swing.JButton jButton56;
-    private javax.swing.JButton jButton57;
-    private javax.swing.JButton jButton58;
-    private javax.swing.JButton jButton59;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton60;
-    private javax.swing.JButton jButton61;
-    private javax.swing.JButton jButton62;
-    private javax.swing.JButton jButton63;
-    private javax.swing.JButton jButton64;
-    private javax.swing.JButton jButton65;
-    private javax.swing.JButton jButton66;
-    private javax.swing.JButton jButton67;
-    private javax.swing.JButton jButton68;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton73;
-    private javax.swing.JButton jButton74;
-    private javax.swing.JButton jButton75;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton80;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JComboBox jComboBox1;
+    public javax.swing.JPasswordField contraseña;
+    public javax.swing.JButton jButton1;
+    public javax.swing.JButton jButton10;
+    public javax.swing.JButton jButton11;
+    public javax.swing.JButton jButton12;
+    public javax.swing.JButton jButton13;
+    public javax.swing.JButton jButton14;
+    public javax.swing.JButton jButton15;
+    public javax.swing.JButton jButton16;
+    public javax.swing.JButton jButton17;
+    public javax.swing.JButton jButton18;
+    public javax.swing.JButton jButton19;
+    public javax.swing.JButton jButton2;
+    public javax.swing.JButton jButton20;
+    public javax.swing.JButton jButton21;
+    public javax.swing.JButton jButton22;
+    public javax.swing.JButton jButton25;
+    public javax.swing.JButton jButton26;
+    public javax.swing.JButton jButton27;
+    public javax.swing.JButton jButton28;
+    public javax.swing.JButton jButton29;
+    public javax.swing.JButton jButton3;
+    public javax.swing.JButton jButton30;
+    public javax.swing.JButton jButton31;
+    public javax.swing.JButton jButton32;
+    public javax.swing.JButton jButton33;
+    public javax.swing.JButton jButton34;
+    public javax.swing.JButton jButton35;
+    public javax.swing.JButton jButton36;
+    public javax.swing.JButton jButton37;
+    public javax.swing.JButton jButton38;
+    public javax.swing.JButton jButton39;
+    public javax.swing.JButton jButton4;
+    public javax.swing.JButton jButton40;
+    public javax.swing.JButton jButton41;
+    public javax.swing.JButton jButton42;
+    public javax.swing.JButton jButton43;
+    public javax.swing.JButton jButton44;
+    public javax.swing.JButton jButton45;
+    public javax.swing.JButton jButton46;
+    public javax.swing.JButton jButton47;
+    public javax.swing.JButton jButton48;
+    public javax.swing.JButton jButton49;
+    public javax.swing.JButton jButton5;
+    public javax.swing.JButton jButton50;
+    public javax.swing.JButton jButton51;
+    public javax.swing.JButton jButton52;
+    public javax.swing.JButton jButton53;
+    public javax.swing.JButton jButton54;
+    public javax.swing.JButton jButton55;
+    public javax.swing.JButton jButton56;
+    public javax.swing.JButton jButton57;
+    public javax.swing.JButton jButton58;
+    public javax.swing.JButton jButton59;
+    public javax.swing.JButton jButton6;
+    public javax.swing.JButton jButton60;
+    public javax.swing.JButton jButton61;
+    public javax.swing.JButton jButton62;
+    public javax.swing.JButton jButton63;
+    public javax.swing.JButton jButton64;
+    public javax.swing.JButton jButton65;
+    public javax.swing.JButton jButton66;
+    public javax.swing.JButton jButton67;
+    public javax.swing.JButton jButton68;
+    public javax.swing.JButton jButton7;
+    public javax.swing.JButton jButton73;
+    public javax.swing.JButton jButton74;
+    public javax.swing.JButton jButton75;
+    public javax.swing.JButton jButton8;
+    public javax.swing.JButton jButton80;
+    public javax.swing.JButton jButton9;
+    public javax.swing.JCheckBox jCheckBox1;
+    public javax.swing.JCheckBox jCheckBox2;
+    public javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    public javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
+    public javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox<String> jComboBox10;
     private javax.swing.JComboBox<String> jComboBox11;
     private javax.swing.JComboBox<String> jComboBox12;
-    private javax.swing.JComboBox jComboBox17;
-    private javax.swing.JComboBox jComboBox18;
-    private javax.swing.JComboBox jComboBox19;
+    public javax.swing.JComboBox jComboBox17;
+    public javax.swing.JComboBox jComboBox18;
+    public javax.swing.JComboBox jComboBox19;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox jComboBox20;
-    private javax.swing.JComboBox jComboBox21;
-    private javax.swing.JComboBox jComboBox22;
+    public javax.swing.JComboBox jComboBox20;
+    public javax.swing.JComboBox jComboBox21;
+    public javax.swing.JComboBox jComboBox22;
     private javax.swing.JComboBox<String> jComboBox23;
-    private javax.swing.JComboBox jComboBox24;
-    private javax.swing.JComboBox jComboBox25;
-    private javax.swing.JComboBox jComboBox26;
+    public javax.swing.JComboBox jComboBox24;
+    public javax.swing.JComboBox jComboBox25;
+    public javax.swing.JComboBox jComboBox26;
     private javax.swing.JComboBox<String> jComboBox27;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox33;
-    private javax.swing.JComboBox jComboBox34;
+    public javax.swing.JComboBox jComboBox34;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JComboBox<String> jComboBox7;
     private javax.swing.JComboBox<String> jComboBox8;
     private javax.swing.JComboBox<String> jComboBox9;
-    private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JFrame jFrame2;
-    private javax.swing.JFrame jFrameBuscarSede;
-    private javax.swing.JFrame jFrameBuscarSede1;
-    private javax.swing.JFrame jFrameCotizacion;
-    private javax.swing.JFrame jFrameGerente;
-    private javax.swing.JFrame jFrameJefeTaller;
-    private javax.swing.JFrame jFrameListarCotizaciones;
-    private javax.swing.JFrame jFrameOrdenTrabajo;
-    private javax.swing.JFrame jFrameRegistrarAutomovil;
-    private javax.swing.JFrame jFrameRegistrarRepuesto;
-    private javax.swing.JFrame jFrameSede;
-    private javax.swing.JFrame jFrameUsuario;
-    private javax.swing.JFrame jFrameVehiculosVenta;
-    private javax.swing.JFrame jFrameVendedor;
-    private javax.swing.JFrame jFrameVenta;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel100;
-    private javax.swing.JLabel jLabel101;
-    private javax.swing.JLabel jLabel102;
-    private javax.swing.JLabel jLabel103;
-    private javax.swing.JLabel jLabel104;
-    private javax.swing.JLabel jLabel105;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel116;
-    private javax.swing.JLabel jLabel117;
-    private javax.swing.JLabel jLabel118;
-    private javax.swing.JLabel jLabel119;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel120;
-    private javax.swing.JLabel jLabel121;
-    private javax.swing.JLabel jLabel122;
-    private javax.swing.JLabel jLabel123;
-    private javax.swing.JLabel jLabel124;
-    private javax.swing.JLabel jLabel125;
-    private javax.swing.JLabel jLabel126;
-    private javax.swing.JLabel jLabel127;
-    private javax.swing.JLabel jLabel128;
-    private javax.swing.JLabel jLabel129;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel54;
-    private javax.swing.JLabel jLabel55;
-    private javax.swing.JLabel jLabel56;
-    private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel59;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel61;
-    private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
-    private javax.swing.JLabel jLabel68;
-    private javax.swing.JLabel jLabel69;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel70;
-    private javax.swing.JLabel jLabel71;
-    private javax.swing.JLabel jLabel72;
-    private javax.swing.JLabel jLabel73;
-    private javax.swing.JLabel jLabel74;
-    private javax.swing.JLabel jLabel75;
-    private javax.swing.JLabel jLabel76;
-    private javax.swing.JLabel jLabel77;
-    private javax.swing.JLabel jLabel78;
-    private javax.swing.JLabel jLabel79;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel80;
-    private javax.swing.JLabel jLabel81;
-    private javax.swing.JLabel jLabel82;
-    private javax.swing.JLabel jLabel83;
-    private javax.swing.JLabel jLabel84;
-    private javax.swing.JLabel jLabel85;
-    private javax.swing.JLabel jLabel86;
-    private javax.swing.JLabel jLabel87;
-    private javax.swing.JLabel jLabel88;
-    private javax.swing.JLabel jLabel89;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabel90;
-    private javax.swing.JLabel jLabel91;
-    private javax.swing.JLabel jLabel92;
-    private javax.swing.JLabel jLabel93;
-    private javax.swing.JLabel jLabel94;
-    private javax.swing.JLabel jLabel95;
-    private javax.swing.JLabel jLabel96;
-    private javax.swing.JLabel jLabel97;
-    private javax.swing.JLabel jLabel98;
-    private javax.swing.JLabel jLabel99;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenu jMenu9;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem18;
-    private javax.swing.JMenuItem jMenuItem19;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem20;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
-    private javax.swing.JPanel jPanel24;
-    private javax.swing.JPanel jPanel25;
-    private javax.swing.JPanel jPanel26;
-    private javax.swing.JPanel jPanel27;
-    private javax.swing.JPanel jPanel28;
-    private javax.swing.JPanel jPanel29;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel30;
-    private javax.swing.JPanel jPanel31;
-    private javax.swing.JPanel jPanel33;
-    private javax.swing.JPanel jPanel34;
-    private javax.swing.JPanel jPanel35;
-    private javax.swing.JPanel jPanel36;
-    private javax.swing.JPanel jPanel37;
-    private javax.swing.JPanel jPanel38;
-    private javax.swing.JPanel jPanel39;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel40;
-    private javax.swing.JPanel jPanel41;
-    private javax.swing.JPanel jPanel42;
-    private javax.swing.JPanel jPanel43;
-    private javax.swing.JPanel jPanel44;
-    private javax.swing.JPanel jPanel45;
-    private javax.swing.JPanel jPanel46;
-    private javax.swing.JPanel jPanel47;
-    private javax.swing.JPanel jPanel48;
-    private javax.swing.JPanel jPanel49;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel50;
-    private javax.swing.JPanel jPanel51;
-    private javax.swing.JPanel jPanel52;
-    private javax.swing.JPanel jPanel53;
-    private javax.swing.JPanel jPanel59;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel60;
-    private javax.swing.JPanel jPanel64;
-    private javax.swing.JPanel jPanel65;
-    private javax.swing.JPanel jPanel66;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JPanel jPanelLogin;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField100;
-    private javax.swing.JTextField jTextField101;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField30;
-    private javax.swing.JTextField jTextField31;
-    private javax.swing.JTextField jTextField32;
-    private javax.swing.JTextField jTextField33;
-    private javax.swing.JTextField jTextField34;
-    private javax.swing.JTextField jTextField35;
-    private javax.swing.JTextField jTextField36;
-    private javax.swing.JTextField jTextField37;
-    private javax.swing.JTextField jTextField38;
-    private javax.swing.JTextField jTextField39;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField40;
-    private javax.swing.JTextField jTextField41;
-    private javax.swing.JTextField jTextField42;
-    private javax.swing.JTextField jTextField43;
-    private javax.swing.JTextField jTextField44;
-    private javax.swing.JTextField jTextField45;
-    private javax.swing.JTextField jTextField46;
-    private javax.swing.JTextField jTextField48;
-    private javax.swing.JTextField jTextField49;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField51;
-    private javax.swing.JTextField jTextField52;
-    private javax.swing.JTextField jTextField53;
-    private javax.swing.JTextField jTextField54;
-    private javax.swing.JTextField jTextField55;
-    private javax.swing.JTextField jTextField56;
-    private javax.swing.JTextField jTextField57;
-    private javax.swing.JTextField jTextField58;
-    private javax.swing.JTextField jTextField59;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField60;
-    private javax.swing.JTextField jTextField61;
-    private javax.swing.JTextField jTextField62;
-    private javax.swing.JTextField jTextField63;
-    private javax.swing.JTextField jTextField64;
-    private javax.swing.JTextField jTextField65;
-    private javax.swing.JTextField jTextField66;
-    private javax.swing.JTextField jTextField67;
-    private javax.swing.JTextField jTextField68;
-    private javax.swing.JTextField jTextField69;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField70;
-    private javax.swing.JTextField jTextField71;
-    private javax.swing.JTextField jTextField72;
-    private javax.swing.JTextField jTextField73;
-    private javax.swing.JTextField jTextField74;
-    private javax.swing.JTextField jTextField75;
-    private javax.swing.JTextField jTextField76;
-    private javax.swing.JTextField jTextField77;
-    private javax.swing.JTextField jTextField78;
-    private javax.swing.JTextField jTextField79;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField80;
-    private javax.swing.JTextField jTextField81;
-    private javax.swing.JTextField jTextField9;
-    private javax.swing.JTextField jTextField93;
-    private javax.swing.JTextField jTextField94;
-    private javax.swing.JTextField jTextField95;
-    private javax.swing.JTextField jTextField96;
-    private javax.swing.JTextField jTextField97;
-    private javax.swing.JTextField jTextField98;
-    private javax.swing.JTextField jTextField99;
-    private javax.swing.JTextField jTextFieldCedulaUsuario;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JLabel nombreUsuario;
-    private javax.swing.JLabel nombreUsuario1;
-    private javax.swing.JLabel nombreUsuario10;
-    private javax.swing.JLabel nombreUsuario11;
-    private javax.swing.JLabel nombreUsuario15;
-    private javax.swing.JLabel nombreUsuario2;
-    private javax.swing.JLabel nombreUsuario3;
-    private javax.swing.JLabel nombreUsuario4;
-    private javax.swing.JLabel nombreUsuario5;
-    private javax.swing.JLabel nombreUsuario7;
-    private javax.swing.JLabel nombreUsuario8;
-    private javax.swing.JLabel nombreUsuario9;
-    private org.edisoncor.gui.panel.PanelAvatarChooser panelAvatarChooser1;
-    private javax.swing.JTextField usuario;
+    public javax.swing.JFileChooser jFileChooser1;
+    public javax.swing.JFrame jFrameBuscarSede;
+    public javax.swing.JFrame jFrameBuscarSede1;
+    public javax.swing.JFrame jFrameCotizacion;
+    public javax.swing.JFrame jFrameGerente;
+    public javax.swing.JFrame jFrameGerenteBotones;
+    public javax.swing.JFrame jFrameJefeTaller;
+    public javax.swing.JFrame jFrameListarCotizaciones;
+    public javax.swing.JFrame jFrameOrdenTrabajo;
+    public javax.swing.JFrame jFrameRegistrarAutomovil;
+    public javax.swing.JFrame jFrameRegistrarRepuesto;
+    public javax.swing.JFrame jFrameSede;
+    public javax.swing.JFrame jFrameUsuario;
+    public javax.swing.JFrame jFrameVehiculosVenta;
+    public javax.swing.JFrame jFrameVendedor;
+    public javax.swing.JFrame jFrameVenta;
+    public javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel10;
+    public javax.swing.JLabel jLabel100;
+    public javax.swing.JLabel jLabel101;
+    public javax.swing.JLabel jLabel102;
+    public javax.swing.JLabel jLabel103;
+    public javax.swing.JLabel jLabel104;
+    public javax.swing.JLabel jLabel105;
+    public javax.swing.JLabel jLabel11;
+    public javax.swing.JLabel jLabel116;
+    public javax.swing.JLabel jLabel117;
+    public javax.swing.JLabel jLabel118;
+    public javax.swing.JLabel jLabel119;
+    public javax.swing.JLabel jLabel12;
+    public javax.swing.JLabel jLabel120;
+    public javax.swing.JLabel jLabel121;
+    public javax.swing.JLabel jLabel122;
+    public javax.swing.JLabel jLabel123;
+    public javax.swing.JLabel jLabel124;
+    public javax.swing.JLabel jLabel125;
+    public javax.swing.JLabel jLabel126;
+    public javax.swing.JLabel jLabel127;
+    public javax.swing.JLabel jLabel128;
+    public javax.swing.JLabel jLabel129;
+    public javax.swing.JLabel jLabel13;
+    public javax.swing.JLabel jLabel14;
+    public javax.swing.JLabel jLabel15;
+    public javax.swing.JLabel jLabel16;
+    public javax.swing.JLabel jLabel17;
+    public javax.swing.JLabel jLabel18;
+    public javax.swing.JLabel jLabel19;
+    public javax.swing.JLabel jLabel2;
+    public javax.swing.JLabel jLabel20;
+    public javax.swing.JLabel jLabel21;
+    public javax.swing.JLabel jLabel22;
+    public javax.swing.JLabel jLabel23;
+    public javax.swing.JLabel jLabel24;
+    public javax.swing.JLabel jLabel25;
+    public javax.swing.JLabel jLabel26;
+    public javax.swing.JLabel jLabel27;
+    public javax.swing.JLabel jLabel28;
+    public javax.swing.JLabel jLabel29;
+    public javax.swing.JLabel jLabel3;
+    public javax.swing.JLabel jLabel30;
+    public javax.swing.JLabel jLabel31;
+    public javax.swing.JLabel jLabel32;
+    public javax.swing.JLabel jLabel33;
+    public javax.swing.JLabel jLabel34;
+    public javax.swing.JLabel jLabel35;
+    public javax.swing.JLabel jLabel36;
+    public javax.swing.JLabel jLabel37;
+    public javax.swing.JLabel jLabel38;
+    public javax.swing.JLabel jLabel39;
+    public javax.swing.JLabel jLabel4;
+    public javax.swing.JLabel jLabel40;
+    public javax.swing.JLabel jLabel41;
+    public javax.swing.JLabel jLabel42;
+    public javax.swing.JLabel jLabel43;
+    public javax.swing.JLabel jLabel44;
+    public javax.swing.JLabel jLabel45;
+    public javax.swing.JLabel jLabel46;
+    public javax.swing.JLabel jLabel47;
+    public javax.swing.JLabel jLabel48;
+    public javax.swing.JLabel jLabel49;
+    public javax.swing.JLabel jLabel5;
+    public javax.swing.JLabel jLabel50;
+    public javax.swing.JLabel jLabel51;
+    public javax.swing.JLabel jLabel52;
+    public javax.swing.JLabel jLabel53;
+    public javax.swing.JLabel jLabel54;
+    public javax.swing.JLabel jLabel55;
+    public javax.swing.JLabel jLabel56;
+    public javax.swing.JLabel jLabel57;
+    public javax.swing.JLabel jLabel58;
+    public javax.swing.JLabel jLabel59;
+    public javax.swing.JLabel jLabel6;
+    public javax.swing.JLabel jLabel60;
+    public javax.swing.JLabel jLabel61;
+    public javax.swing.JLabel jLabel62;
+    public javax.swing.JLabel jLabel63;
+    public javax.swing.JLabel jLabel64;
+    public javax.swing.JLabel jLabel65;
+    public javax.swing.JLabel jLabel66;
+    public javax.swing.JLabel jLabel67;
+    public javax.swing.JLabel jLabel68;
+    public javax.swing.JLabel jLabel69;
+    public javax.swing.JLabel jLabel7;
+    public javax.swing.JLabel jLabel70;
+    public javax.swing.JLabel jLabel71;
+    public javax.swing.JLabel jLabel72;
+    public javax.swing.JLabel jLabel73;
+    public javax.swing.JLabel jLabel74;
+    public javax.swing.JLabel jLabel75;
+    public javax.swing.JLabel jLabel76;
+    public javax.swing.JLabel jLabel77;
+    public javax.swing.JLabel jLabel78;
+    public javax.swing.JLabel jLabel79;
+    public javax.swing.JLabel jLabel8;
+    public javax.swing.JLabel jLabel80;
+    public javax.swing.JLabel jLabel81;
+    public javax.swing.JLabel jLabel82;
+    public javax.swing.JLabel jLabel83;
+    public javax.swing.JLabel jLabel84;
+    public javax.swing.JLabel jLabel85;
+    public javax.swing.JLabel jLabel86;
+    public javax.swing.JLabel jLabel87;
+    public javax.swing.JLabel jLabel88;
+    public javax.swing.JLabel jLabel89;
+    public javax.swing.JLabel jLabel9;
+    public javax.swing.JLabel jLabel90;
+    public javax.swing.JLabel jLabel91;
+    public javax.swing.JLabel jLabel92;
+    public javax.swing.JLabel jLabel93;
+    public javax.swing.JLabel jLabel94;
+    public javax.swing.JLabel jLabel95;
+    public javax.swing.JLabel jLabel96;
+    public javax.swing.JLabel jLabel97;
+    public javax.swing.JLabel jLabel98;
+    public javax.swing.JLabel jLabel99;
+    public javax.swing.JMenu jMenu1;
+    public javax.swing.JMenu jMenu10;
+    public javax.swing.JMenu jMenu11;
+    public javax.swing.JMenu jMenu12;
+    public javax.swing.JMenu jMenu13;
+    public javax.swing.JMenu jMenu14;
+    public javax.swing.JMenu jMenu15;
+    public javax.swing.JMenu jMenu16;
+    public javax.swing.JMenu jMenu17;
+    public javax.swing.JMenu jMenu2;
+    public javax.swing.JMenu jMenu3;
+    public javax.swing.JMenu jMenu4;
+    public javax.swing.JMenu jMenu5;
+    public javax.swing.JMenu jMenu6;
+    public javax.swing.JMenu jMenu7;
+    public javax.swing.JMenu jMenu8;
+    public javax.swing.JMenu jMenu9;
+    public javax.swing.JMenuBar jMenuBar1;
+    public javax.swing.JMenuBar jMenuBar2;
+    public javax.swing.JMenuBar jMenuBar3;
+    public javax.swing.JMenuItem jMenuItem1;
+    public javax.swing.JMenuItem jMenuItem10;
+    public javax.swing.JMenuItem jMenuItem11;
+    public javax.swing.JMenuItem jMenuItem12;
+    public javax.swing.JMenuItem jMenuItem13;
+    public javax.swing.JMenuItem jMenuItem14;
+    public javax.swing.JMenuItem jMenuItem15;
+    public javax.swing.JMenuItem jMenuItem16;
+    public javax.swing.JMenuItem jMenuItem17;
+    public javax.swing.JMenuItem jMenuItem18;
+    public javax.swing.JMenuItem jMenuItem19;
+    public javax.swing.JMenuItem jMenuItem2;
+    public javax.swing.JMenuItem jMenuItem20;
+    public javax.swing.JMenuItem jMenuItem21;
+    public javax.swing.JMenuItem jMenuItem22;
+    public javax.swing.JMenuItem jMenuItem23;
+    public javax.swing.JMenuItem jMenuItem24;
+    public javax.swing.JMenuItem jMenuItem25;
+    public javax.swing.JMenuItem jMenuItem26;
+    public javax.swing.JMenuItem jMenuItem27;
+    public javax.swing.JMenuItem jMenuItem28;
+    public javax.swing.JMenuItem jMenuItem29;
+    public javax.swing.JMenuItem jMenuItem3;
+    public javax.swing.JMenuItem jMenuItem30;
+    public javax.swing.JMenuItem jMenuItem31;
+    public javax.swing.JMenuItem jMenuItem32;
+    public javax.swing.JMenuItem jMenuItem33;
+    public javax.swing.JMenuItem jMenuItem34;
+    public javax.swing.JMenuItem jMenuItem35;
+    public javax.swing.JMenuItem jMenuItem36;
+    public javax.swing.JMenuItem jMenuItem37;
+    public javax.swing.JMenuItem jMenuItem38;
+    public javax.swing.JMenuItem jMenuItem39;
+    public javax.swing.JMenuItem jMenuItem4;
+    public javax.swing.JMenuItem jMenuItem5;
+    public javax.swing.JMenuItem jMenuItem6;
+    public javax.swing.JMenuItem jMenuItem7;
+    public javax.swing.JMenuItem jMenuItem8;
+    public javax.swing.JMenuItem jMenuItem9;
+    public javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPanel10;
+    public javax.swing.JPanel jPanel11;
+    public javax.swing.JPanel jPanel12;
+    public javax.swing.JPanel jPanel13;
+    public javax.swing.JPanel jPanel14;
+    public javax.swing.JPanel jPanel15;
+    public javax.swing.JPanel jPanel16;
+    public javax.swing.JPanel jPanel17;
+    public javax.swing.JPanel jPanel18;
+    public javax.swing.JPanel jPanel19;
+    public javax.swing.JPanel jPanel2;
+    public javax.swing.JPanel jPanel20;
+    public javax.swing.JPanel jPanel21;
+    public javax.swing.JPanel jPanel22;
+    public javax.swing.JPanel jPanel23;
+    public javax.swing.JPanel jPanel24;
+    public javax.swing.JPanel jPanel25;
+    public javax.swing.JPanel jPanel26;
+    public javax.swing.JPanel jPanel27;
+    public javax.swing.JPanel jPanel28;
+    public javax.swing.JPanel jPanel29;
+    public javax.swing.JPanel jPanel3;
+    public javax.swing.JPanel jPanel30;
+    public javax.swing.JPanel jPanel33;
+    public javax.swing.JPanel jPanel34;
+    public javax.swing.JPanel jPanel35;
+    public javax.swing.JPanel jPanel36;
+    public javax.swing.JPanel jPanel37;
+    public javax.swing.JPanel jPanel38;
+    public javax.swing.JPanel jPanel39;
+    public javax.swing.JPanel jPanel4;
+    public javax.swing.JPanel jPanel40;
+    public javax.swing.JPanel jPanel41;
+    public javax.swing.JPanel jPanel42;
+    public javax.swing.JPanel jPanel43;
+    public javax.swing.JPanel jPanel44;
+    public javax.swing.JPanel jPanel45;
+    public javax.swing.JPanel jPanel46;
+    public javax.swing.JPanel jPanel47;
+    public javax.swing.JPanel jPanel48;
+    public javax.swing.JPanel jPanel49;
+    public javax.swing.JPanel jPanel5;
+    public javax.swing.JPanel jPanel50;
+    public javax.swing.JPanel jPanel52;
+    public javax.swing.JPanel jPanel53;
+    public javax.swing.JPanel jPanel59;
+    public javax.swing.JPanel jPanel6;
+    public javax.swing.JPanel jPanel60;
+    public javax.swing.JPanel jPanel64;
+    public javax.swing.JPanel jPanel65;
+    public javax.swing.JPanel jPanel66;
+    public javax.swing.JPanel jPanel7;
+    public javax.swing.JPanel jPanel8;
+    public javax.swing.JPanel jPanel9;
+    public javax.swing.JPanel jPanelLogin;
+    public javax.swing.JRadioButton jRadioButton1;
+    public javax.swing.JRadioButton jRadioButton4;
+    public javax.swing.JRadioButton jRadioButton5;
+    public javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JSeparator jSeparator1;
+    public javax.swing.JTextArea jTextArea1;
+    public javax.swing.JTextField jTextField1;
+    public javax.swing.JTextField jTextField10;
+    public javax.swing.JTextField jTextField100;
+    public javax.swing.JTextField jTextField101;
+    public javax.swing.JTextField jTextField11;
+    public javax.swing.JTextField jTextField12;
+    public javax.swing.JTextField jTextField13;
+    public javax.swing.JTextField jTextField14;
+    public javax.swing.JTextField jTextField15;
+    public javax.swing.JTextField jTextField16;
+    public javax.swing.JTextField jTextField17;
+    public javax.swing.JTextField jTextField18;
+    public javax.swing.JTextField jTextField19;
+    public javax.swing.JTextField jTextField2;
+    public javax.swing.JTextField jTextField27;
+    public javax.swing.JTextField jTextField3;
+    public javax.swing.JTextField jTextField30;
+    public javax.swing.JTextField jTextField31;
+    public javax.swing.JTextField jTextField32;
+    public javax.swing.JTextField jTextField33;
+    public javax.swing.JTextField jTextField34;
+    public javax.swing.JTextField jTextField35;
+    public javax.swing.JTextField jTextField36;
+    public javax.swing.JTextField jTextField37;
+    public javax.swing.JTextField jTextField38;
+    public javax.swing.JTextField jTextField39;
+    public javax.swing.JTextField jTextField4;
+    public javax.swing.JTextField jTextField40;
+    public javax.swing.JTextField jTextField41;
+    public javax.swing.JTextField jTextField42;
+    public javax.swing.JTextField jTextField43;
+    public javax.swing.JTextField jTextField44;
+    public javax.swing.JTextField jTextField45;
+    public javax.swing.JTextField jTextField46;
+    public javax.swing.JTextField jTextField48;
+    public javax.swing.JTextField jTextField49;
+    public javax.swing.JTextField jTextField5;
+    public javax.swing.JTextField jTextField51;
+    public javax.swing.JTextField jTextField52;
+    public javax.swing.JTextField jTextField53;
+    public javax.swing.JTextField jTextField54;
+    public javax.swing.JTextField jTextField55;
+    public javax.swing.JTextField jTextField56;
+    public javax.swing.JTextField jTextField57;
+    public javax.swing.JTextField jTextField58;
+    public javax.swing.JTextField jTextField59;
+    public javax.swing.JTextField jTextField6;
+    public javax.swing.JTextField jTextField60;
+    public javax.swing.JTextField jTextField61;
+    public javax.swing.JTextField jTextField62;
+    public javax.swing.JTextField jTextField63;
+    public javax.swing.JTextField jTextField64;
+    public javax.swing.JTextField jTextField65;
+    public javax.swing.JTextField jTextField66;
+    public javax.swing.JTextField jTextField67;
+    public javax.swing.JTextField jTextField68;
+    public javax.swing.JTextField jTextField69;
+    public javax.swing.JTextField jTextField7;
+    public javax.swing.JTextField jTextField70;
+    public javax.swing.JTextField jTextField71;
+    public javax.swing.JTextField jTextField72;
+    public javax.swing.JTextField jTextField73;
+    public javax.swing.JTextField jTextField74;
+    public javax.swing.JTextField jTextField75;
+    public javax.swing.JTextField jTextField76;
+    public javax.swing.JTextField jTextField77;
+    public javax.swing.JTextField jTextField78;
+    public javax.swing.JTextField jTextField79;
+    public javax.swing.JTextField jTextField8;
+    public javax.swing.JTextField jTextField80;
+    public javax.swing.JTextField jTextField81;
+    public javax.swing.JTextField jTextField9;
+    public javax.swing.JTextField jTextField93;
+    public javax.swing.JTextField jTextField94;
+    public javax.swing.JTextField jTextField95;
+    public javax.swing.JTextField jTextField96;
+    public javax.swing.JTextField jTextField97;
+    public javax.swing.JTextField jTextField98;
+    public javax.swing.JTextField jTextField99;
+    public javax.swing.JTextField jTextFieldCedulaUsuario;
+    public javax.swing.JToggleButton jToggleButton1;
+    public javax.swing.JToggleButton jToggleButton2;
+    public javax.swing.JLabel nombreUsuario;
+    public javax.swing.JLabel nombreUsuario1;
+    public javax.swing.JLabel nombreUsuario10;
+    public javax.swing.JLabel nombreUsuario11;
+    public javax.swing.JLabel nombreUsuario15;
+    public javax.swing.JLabel nombreUsuario2;
+    public javax.swing.JLabel nombreUsuario3;
+    public javax.swing.JLabel nombreUsuario4;
+    public javax.swing.JLabel nombreUsuario5;
+    public javax.swing.JLabel nombreUsuario7;
+    public javax.swing.JLabel nombreUsuario8;
+    public javax.swing.JLabel nombreUsuario9;
+    public org.edisoncor.gui.panel.PanelAvatarChooser panelAvatarChooser1;
+    public org.edisoncor.gui.panel.PanelAvatarChooser panelAvatarChooser2;
+    public javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -18,7 +18,7 @@ public class Main  {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-        Interfaz interfaz=new Interfaz();
+        Manejadora_Eventos eventos=new Manejadora_Eventos();
         // TODO code application logic her
         
         
